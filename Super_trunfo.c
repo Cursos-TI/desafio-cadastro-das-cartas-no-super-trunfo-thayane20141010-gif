@@ -70,6 +70,7 @@ int main() {
 
 
     //EXIBIÇÃO DE DADOS CADASTRADOS DA CARTA 1
+    
 
     printf("\n carta 1 \n");
     printf("Estado: %c\n", estado1);
