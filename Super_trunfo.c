@@ -25,8 +25,7 @@ int main() {
     float pibpercapita2;
     float superpoder2; // Nova variavel para super Poder - nivel Mestre
 
-    //COLETA DE DADOS DA CARTA 1
-
+//COLETA DE DADOS DA CARTA 1
     printf("Atributos da carta 1 \n");
     printf("Digite o Estado (Uma Letra de A a H): \n");
     scanf(" %c", &estado1);
@@ -47,13 +46,9 @@ int main() {
     scanf(" %f", &pib1);
 
     printf("Qual a Quantidade de Pontos Turisticos na Cidade? \n");
-    scanf(" %d", &numerodepontoturistico1);
-
+    scanf(" %d", &numerodepontoturistico1);    
     
-    
-    //COLETA DE DADOS DA CARTA 2
-
-
+//COLETA DE DADOS DA CARTA 2
     printf("Atributos da carta 2 \n");
     printf("Digite o Estado (Uma Letra de A a H): \n");
     scanf(" %c", &estado2);
@@ -77,7 +72,6 @@ int main() {
     scanf(" %d", &numerodepontoturistico2);
 
 // Calculos dos atributos Densidade populacional e Pib per Capita
-
     Densidadepopulacional1 = (float) populacao1 / area1;
     pibpercapita1 = (pib1 * 1000000000) /(float) populacao1;
 
@@ -89,7 +83,7 @@ int main() {
     superpoder1 = (float)populacao1 + area1 + pib1 + (float)numerodepontoturistico1 + pibpercapita1 + (1.0 /Densidadepopulacional1);
     superpoder2 = (float)populacao2 + area2 + pib2 + (float)numerodepontoturistico2 + pibpercapita2 + (1.0 /Densidadepopulacional2);
 
-    //EXIBIÇÃO DE DADOS CADASTRADOS DA CARTA 1
+ //EXIBIÇÃO DE DADOS CADASTRADOS DA CARTA 1
     
     printf("\n carta 1 \n");
     printf("Estado: %c\n", estado1);
@@ -106,7 +100,7 @@ int main() {
 
     printf("\n");
 
-    //EXIBIÇÃO DE DADOS CADASTRADOS DA CARTA 2
+//EXIBIÇÃO DE DADOS CADASTRADOS DA CARTA 2
 
     printf("\n carta 2 \n");
     printf("Estado: %c\n", estado2);
