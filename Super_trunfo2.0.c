@@ -1,4 +1,7 @@
 #include <stdio.h> //Biblioteca para as Funções de Entrada e Saida de Dados
+#include<stdlib.h>
+#include <time.h>
+
 int main() {
 
     //Atributos da carta 1
