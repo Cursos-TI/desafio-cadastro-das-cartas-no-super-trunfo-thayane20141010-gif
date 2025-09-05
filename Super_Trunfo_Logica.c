@@ -133,7 +133,6 @@ int main()
         case 6: valor2_carta1 = Densidadepopulacional1; valor2_carta2 = Densidadepopulacional2; break;
         case 7: valor2_carta1 = superpoder1; valor2_carta2 = superpoder2; break;
     }
-
     soma_carta1 = valor1_carta1 + valor2_carta1;
     soma_carta2 = valor1_carta2 + valor2_carta2;
 
@@ -146,7 +145,6 @@ int main()
     } else {
         printf("\n*** VENCEDOR DA RODADA: %s! ***\n", (soma_carta1 > soma_carta2) ? nomedacidade1 : nomedacidade2);
     }
-
     printf("\nFim de jogo!\n");
 
     return 0;
