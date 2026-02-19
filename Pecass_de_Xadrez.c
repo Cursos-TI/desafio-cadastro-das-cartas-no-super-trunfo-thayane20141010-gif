@@ -1,72 +1,174 @@
-#include <stdio.h> // Biblioteca de Entrada e Saída de dados
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
-    //Implemetação Recusividade para Torre
+#define MAX_ITENS 10
 
-void moverTorre(int casas){ 
-    if (casas > 0)
-    {
-        printf("Direita \n");
-        moverTorre(casas - 1);
+// ===============================
+// Definição da struct Item
+// ===============================
+typedef struct {
+    char nome[30];
+    char tipo[20];
+    int quantidade;
+} Item;
+
+// Vetor que armazenará os itens
+Item mochila[MAX_ITENS];
+
+// Variável que controla quantos itens existem na mochila
+int totalItens = 0;
+
+// ===============================
+// Função para inserir item
+// ===============================
+void inserirItem() {
+    if (totalItens >= MAX_ITENS) {
+        printf("\nMochila cheia! Não é possível adicionar mais itens.\n");
+        return;
     }
-    
+
+    printf("\n=== Cadastro de Item ===\n");
+
+    printf("Nome do item: ");
+    scanf(" %[^\n]", mochila[totalItens].nome);
+
+    printf("Tipo do item (arma, municao, cura...): ");
+    scanf(" %[^\n]", mochila[totalItens].tipo);
+
+    printf("Quantidade: ");
+    scanf("%d", &mochila[totalItens].quantidade);
+
+    totalItens++;
+
+    printf("\nItem adicionado com sucesso!\n");
 }
 
-    //Implemetação Recusividade para Bispo
-
-void moverBispo(int casas){
-    if (casas > 0)
-    {
-       printf("Cima ");
-       printf("Direita \n");        
-       moverBispo(casas - 1);
-    }
+// ===============================
+// Função para remover item
+// ===============================
+void removerItem() {
+    if (totalItens == 0) {
+        printf("\nMochila vazia!\n");
+        return;
     }
 
-    //Implemetação Recusividade para Rainha
+    char nomeBusca[30];
+    int encontrado = -1;
 
-void moverRainha(int casas){
-    if (casas > 0)
-    {
-        printf("Esqueda\n");        
-        moverRainha(casas - 1);
-    }
+    printf("\nDigite o nome do item a remover: ");
+    scanf(" %[^\n]", nomeBusca);
+
+    // Busca sequencial
+    for (int i = 0; i < totalItens; i++) {
+        if (strcmp(mochila[i].nome, nomeBusca) == 0) {
+            encontrado = i;
+            break;
+        }
     }
 
+    if (encontrado == -1) {
+        printf("\nItem não encontrado!\n");
+    } else {
+        // Desloca os elementos para "fechar o buraco"
+        for (int i = encontrado; i < totalItens - 1; i++) {
+            mochila[i] = mochila[i + 1];
+        }
+
+        totalItens--;
+        printf("\nItem removido com sucesso!\n");
+    }
+}
+
+// ===============================
+// Função para listar itens
+// ===============================
+void listarItens() {
+    if (totalItens == 0) {
+        printf("\nMochila vazia!\n");
+        return;
+    }
+
+    printf("\n=== Itens na Mochila ===\n");
+
+    for (int i = 0; i < totalItens; i++) {
+        printf("\nItem %d\n", i + 1);
+        printf("Nome: %s\n", mochila[i].nome);
+        printf("Tipo: %s\n", mochila[i].tipo);
+        printf("Quantidade: %d\n", mochila[i].quantidade);
+    }
+}
+
+// ===============================
+// Função para buscar item
+// ===============================
+void buscarItem() {
+    if (totalItens == 0) {
+        printf("\nMochila vazia!\n");
+        return;
+    }
+
+    char nomeBusca[30];
+    int encontrado = 0;
+
+    printf("\nDigite o nome do item a buscar: ");
+    scanf(" %[^\n]", nomeBusca);
+
+    for (int i = 0; i < totalItens; i++) {
+        if (strcmp(mochila[i].nome, nomeBusca) == 0) {
+            printf("\nItem encontrado!\n");
+            printf("Nome: %s\n", mochila[i].nome);
+            printf("Tipo: %s\n", mochila[i].tipo);
+            printf("Quantidade: %d\n", mochila[i].quantidade);
+            encontrado = 1;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("\nItem não encontrado.\n");
+    }
+}
+
+// ===============================
+// Função principal (menu)
+// ===============================
 int main() {
-   
-    // Movimento da Torre
+    int opcao;
 
-    printf("\n--- Movimento da Torre (5 casas para a direita) ---\n");
+    do {
+        printf("\n=== SISTEMA DE INVENTÁRIO ===\n");
+        printf("1 - Inserir Item\n");
+        printf("2 - Remover Item\n");
+        printf("3 - Listar Itens\n");
+        printf("4 - Buscar Item\n");
+        printf("0 - Sair\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
 
-    moverTorre(5); // Quantidade de movimentação 
-    
-     // Movimento do Bispo
-
-    printf("\n--- Movimento do Bispo (5 casas na diagonal para cima e à direita) ---\n");
-
-    moverBispo(5);  // Quantidade de movimentação 
-
-    // Movimento da Rainha
-
-    printf("\n--- Movimento da Rainha (8 casas para a esquerda) ---\n");
-
-    moverRainha(8); // Quantidade de movimentação 
-
-    // Movimento do Cavalo
-
-     printf("--- Movimento do Cavalo (2 casas para baixo, 1 para a esquerda) ---\n");
-         
-    for (int i = 0,j = 0; i < 2 || j< 1; ) {
-        if (i < 2)
-        {
-            printf("Baixo\n"); // Imprime "Baixo" duas vezes
-            i++;
-        } else if (j < 1)
-        {
-           printf("Esquerda\n"); // Imprime "Esqueda" uma vezes
-           j++;
+        switch (opcao) {
+            case 1:
+                inserirItem();
+                listarItens();
+                break;
+            case 2:
+                removerItem();
+                listarItens();
+                break;
+            case 3:
+                listarItens();
+                break;
+            case 4:
+                buscarItem();
+                break;
+            case 0:
+                printf("\nEncerrando o sistema...\n");
+                break;
+            default:
+                printf("\nOpção inválida!\n");
         }
-        
-        }
+
+    } while (opcao != 0);
+
     return 0;
 }
